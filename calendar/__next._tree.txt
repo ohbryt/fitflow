@@ -1,2 +1,2 @@
-:HL["/fitflow/_next/static/chunks/f1f95ab2fbf09acb.css","style"]
-0:{"buildId":"vKwuzV7MkK1Xv58tt4crg","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"calendar","paramType":null,"paramKey":"calendar","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+:HL["/fitflow/_next/static/chunks/359b34fbeba8fb53.css","style"]
+0:{"buildId":"nTtig5gDi3I95mcEtfw8i","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"calendar","paramType":null,"paramKey":"calendar","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
