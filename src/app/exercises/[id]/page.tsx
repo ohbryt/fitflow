@@ -6,6 +6,8 @@ import Link from "next/link";
 import { EXERCISES, getExerciseById } from "@/lib/exercise-data";
 import { MUSCLE_GROUPS, EQUIPMENT_LABELS, DIFFICULTY_LABELS } from "@/lib/types";
 import type { Exercise, MuscleGroup, Difficulty } from "@/lib/types";
+import { MuscleMap } from "../../components/MuscleMap";
+import { YouTubeSection } from "../../components/YouTubeSection";
 
 export default function ExerciseDetailPage() {
   const params = useParams();
@@ -66,10 +68,20 @@ export default function ExerciseDetailPage() {
         </div>
       </div>
 
-      {/* Muscles */}
+      {/* YouTube Video */}
+      <YouTubeSection
+        exerciseNameKo={exercise.name_ko}
+        exerciseName={exercise.name}
+      />
+
+      {/* Muscle Anatomy Map */}
       <div className="bg-bg-card rounded-2xl p-5 border border-border">
-        <h2 className="font-semibold text-sm text-text-muted mb-3">🎯 타겟 근육</h2>
-        <div className="space-y-3">
+        <h2 className="font-semibold text-sm text-text-muted mb-4">🎯 타겟 근육</h2>
+        <MuscleMap
+          primaryMuscles={exercise.primary_muscles}
+          secondaryMuscles={exercise.secondary_muscles}
+        />
+        <div className="mt-5 space-y-3">
           <div>
             <p className="text-xs text-text-muted mb-1.5">주동근</p>
             <div className="flex flex-wrap gap-1.5">
