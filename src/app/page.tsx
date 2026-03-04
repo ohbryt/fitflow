@@ -15,7 +15,7 @@ export default function HomePage() {
   const [stats, setStats] = useState<Stats | null>(null);
 
   useEffect(() => {
-    fetch("/api/stats").then((r) => r.json()).then(setStats).catch(() => {});
+    import("@/lib/storage").then(({ getStats }) => setStats(getStats()));
   }, []);
 
   return (
