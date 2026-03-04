@@ -1,0 +1,2 @@
+:HL["/fitflow/_next/static/chunks/84636164c15a6e69.css","style"]
+0:{"buildId":"a-4oNC3XFWLRjochiMfSP","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
