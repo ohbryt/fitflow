@@ -1,3 +1,5 @@
+export type Difficulty = "beginner" | "intermediate" | "advanced";
+
 export interface Exercise {
   id: number;
   name: string;
@@ -7,6 +9,18 @@ export interface Exercise {
   equipment: string;
   description?: string;
   image_url?: string;
+  // 신규 상세 필드
+  difficulty: Difficulty;
+  primary_muscles: string[];
+  secondary_muscles: string[];
+  how_to: string[];          // 단계별 자세 설명
+  tips: string[];            // 운동 팁
+  common_mistakes: string[]; // 흔한 실수
+  alternatives: string[];    // 대체 운동 (name_ko)
+  calories_per_min?: number; // 분당 칼로리 (유산소)
+  recommended_sets: string;  // "3-4세트"
+  recommended_reps: string;  // "8-12회" 또는 "30-60초"
+  rest_seconds: number;      // 권장 휴식
 }
 
 export interface Routine {
@@ -84,4 +98,13 @@ export const EQUIPMENT_LABELS: Record<string, string> = {
   machine: "머신",
   ab_wheel: "ab 휠",
   jump_rope: "줄넘기",
+  ez_bar: "EZ바",
+  kettlebell: "케틀벨",
+  band: "밴드",
+};
+
+export const DIFFICULTY_LABELS: Record<Difficulty, { label: string; color: string }> = {
+  beginner: { label: "초급", color: "text-green-400" },
+  intermediate: { label: "중급", color: "text-yellow-400" },
+  advanced: { label: "고급", color: "text-red-400" },
 };

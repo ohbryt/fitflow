@@ -1,6 +1,7 @@
 "use client";
 
 import { MUSCLE_GROUPS } from "./types";
+import { EXERCISES } from "./exercise-data";
 import type { Exercise, Routine, RoutineExercise, WorkoutSession, WorkoutLog } from "./types";
 
 // ========== localStorage 헬퍼 ==========
@@ -16,49 +17,9 @@ function set(key: string, value: unknown) {
   localStorage.setItem(`fitflow:${key}`, JSON.stringify(value));
 }
 
-// ========== 시드 운동 데이터 ==========
-const SEED_EXERCISES: Exercise[] = [
-  { id:1, name:"Bench Press", name_ko:"벤치 프레스", category:"strength", muscle_group:"chest", equipment:"barbell" },
-  { id:2, name:"Incline Bench Press", name_ko:"인클라인 벤치 프레스", category:"strength", muscle_group:"chest", equipment:"barbell" },
-  { id:3, name:"Dumbbell Fly", name_ko:"덤벨 플라이", category:"strength", muscle_group:"chest", equipment:"dumbbell" },
-  { id:4, name:"Push Up", name_ko:"푸시업", category:"bodyweight", muscle_group:"chest", equipment:"none" },
-  { id:5, name:"Cable Crossover", name_ko:"케이블 크로스오버", category:"strength", muscle_group:"chest", equipment:"cable" },
-  { id:6, name:"Deadlift", name_ko:"데드리프트", category:"strength", muscle_group:"back", equipment:"barbell" },
-  { id:7, name:"Pull Up", name_ko:"풀업", category:"bodyweight", muscle_group:"back", equipment:"none" },
-  { id:8, name:"Barbell Row", name_ko:"바벨 로우", category:"strength", muscle_group:"back", equipment:"barbell" },
-  { id:9, name:"Lat Pulldown", name_ko:"랫 풀다운", category:"strength", muscle_group:"back", equipment:"machine" },
-  { id:10, name:"Seated Row", name_ko:"시티드 로우", category:"strength", muscle_group:"back", equipment:"cable" },
-  { id:11, name:"Overhead Press", name_ko:"오버헤드 프레스", category:"strength", muscle_group:"shoulders", equipment:"barbell" },
-  { id:12, name:"Lateral Raise", name_ko:"레터럴 레이즈", category:"strength", muscle_group:"shoulders", equipment:"dumbbell" },
-  { id:13, name:"Front Raise", name_ko:"프론트 레이즈", category:"strength", muscle_group:"shoulders", equipment:"dumbbell" },
-  { id:14, name:"Face Pull", name_ko:"페이스 풀", category:"strength", muscle_group:"shoulders", equipment:"cable" },
-  { id:15, name:"Arnold Press", name_ko:"아놀드 프레스", category:"strength", muscle_group:"shoulders", equipment:"dumbbell" },
-  { id:16, name:"Squat", name_ko:"스쿼트", category:"strength", muscle_group:"legs", equipment:"barbell" },
-  { id:17, name:"Leg Press", name_ko:"레그 프레스", category:"strength", muscle_group:"legs", equipment:"machine" },
-  { id:18, name:"Romanian Deadlift", name_ko:"루마니안 데드리프트", category:"strength", muscle_group:"legs", equipment:"barbell" },
-  { id:19, name:"Leg Extension", name_ko:"레그 익스텐션", category:"strength", muscle_group:"legs", equipment:"machine" },
-  { id:20, name:"Leg Curl", name_ko:"레그 컬", category:"strength", muscle_group:"legs", equipment:"machine" },
-  { id:21, name:"Lunge", name_ko:"런지", category:"strength", muscle_group:"legs", equipment:"dumbbell" },
-  { id:22, name:"Calf Raise", name_ko:"카프 레이즈", category:"strength", muscle_group:"legs", equipment:"machine" },
-  { id:23, name:"Barbell Curl", name_ko:"바벨 컬", category:"strength", muscle_group:"arms", equipment:"barbell" },
-  { id:24, name:"Tricep Pushdown", name_ko:"트라이셉 푸시다운", category:"strength", muscle_group:"arms", equipment:"cable" },
-  { id:25, name:"Hammer Curl", name_ko:"해머 컬", category:"strength", muscle_group:"arms", equipment:"dumbbell" },
-  { id:26, name:"Skull Crusher", name_ko:"스컬 크러셔", category:"strength", muscle_group:"arms", equipment:"barbell" },
-  { id:27, name:"Dips", name_ko:"딥스", category:"bodyweight", muscle_group:"arms", equipment:"none" },
-  { id:28, name:"Plank", name_ko:"플랭크", category:"bodyweight", muscle_group:"core", equipment:"none" },
-  { id:29, name:"Crunch", name_ko:"크런치", category:"bodyweight", muscle_group:"core", equipment:"none" },
-  { id:30, name:"Russian Twist", name_ko:"러시안 트위스트", category:"bodyweight", muscle_group:"core", equipment:"none" },
-  { id:31, name:"Leg Raise", name_ko:"레그 레이즈", category:"bodyweight", muscle_group:"core", equipment:"none" },
-  { id:32, name:"Ab Wheel Rollout", name_ko:"ab 롤아웃", category:"bodyweight", muscle_group:"core", equipment:"ab_wheel" },
-  { id:33, name:"Running", name_ko:"러닝", category:"cardio", muscle_group:"cardio", equipment:"none" },
-  { id:34, name:"Cycling", name_ko:"사이클링", category:"cardio", muscle_group:"cardio", equipment:"machine" },
-  { id:35, name:"Jump Rope", name_ko:"줄넘기", category:"cardio", muscle_group:"cardio", equipment:"jump_rope" },
-  { id:36, name:"Rowing Machine", name_ko:"로잉 머신", category:"cardio", muscle_group:"cardio", equipment:"machine" },
-];
-
 // ========== Exercises ==========
 export function getExercises(muscle?: string, q?: string): Exercise[] {
-  let list = SEED_EXERCISES;
+  let list = EXERCISES;
   if (muscle) list = list.filter(e => e.muscle_group === muscle);
   if (q) { const s = q.toLowerCase(); list = list.filter(e => e.name.toLowerCase().includes(s) || e.name_ko.includes(s)); }
   return list;
@@ -81,7 +42,7 @@ export function getRoutine(id: number): (Routine & { exercises: RoutineExercise[
   if (!r) return null;
   const reMap = get<Record<string, RoutineExercise[]>>("routine_exercises", {});
   const exercises = (reMap[id] || []).map(re => {
-    const ex = SEED_EXERCISES.find(e => e.id === re.exercise_id);
+    const ex = EXERCISES.find(e => e.id === re.exercise_id);
     return { ...re, exercise_name: ex?.name, exercise_name_ko: ex?.name_ko, muscle_group: ex?.muscle_group };
   });
   return { ...r, exercises };
@@ -142,7 +103,7 @@ export function finishSession(id: number) {
 export function addLog(session_id: number, exercise_id: number, set_number: number, reps: number, weight: number, completed: boolean) {
   const logsMap = get<Record<string, WorkoutLog[]>>("workout_logs", {});
   const logs = logsMap[session_id] || [];
-  const ex = SEED_EXERCISES.find(e => e.id === exercise_id);
+  const ex = EXERCISES.find(e => e.id === exercise_id);
   logs.push({ id: Date.now(), session_id, exercise_id, exercise_name: ex?.name, exercise_name_ko: ex?.name_ko, set_number, reps, weight, completed, logged_at: new Date().toISOString() });
   logsMap[session_id] = logs;
   set("workout_logs", logsMap);
@@ -173,7 +134,7 @@ export function getStats() {
   // muscle distribution
   const muscleCount: Record<string, number> = {};
   const recentLogs = allLogs.filter(l => l.logged_at && l.logged_at >= weekAgo);
-  recentLogs.forEach(l => { const ex = SEED_EXERCISES.find(e => e.id === l.exercise_id); if (ex) muscleCount[ex.muscle_group] = (muscleCount[ex.muscle_group]||0) + 1; });
+  recentLogs.forEach(l => { const ex = EXERCISES.find(e => e.id === l.exercise_id); if (ex) muscleCount[ex.muscle_group] = (muscleCount[ex.muscle_group]||0) + 1; });
 
   return {
     totalWorkouts: finished.length, totalVolume: Math.round(totalVolume),
