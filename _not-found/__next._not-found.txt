@@ -1,4 +1,4 @@
 1:"$Sreact.fragment"
-2:I[39756,["/fitflow/_next/static/chunks/07cc5e582a71e4d9.js","/fitflow/_next/static/chunks/d2be314c3ece3fbe.js"],"default"]
-3:I[37457,["/fitflow/_next/static/chunks/07cc5e582a71e4d9.js","/fitflow/_next/static/chunks/d2be314c3ece3fbe.js"],"default"]
-0:{"buildId":"Z4euUjmQn9jBAwK0nJtTz","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
+2:I[39756,["/fitflow/_next/static/chunks/529635a3320f1990.js","/fitflow/_next/static/chunks/d2be314c3ece3fbe.js"],"default"]
+3:I[37457,["/fitflow/_next/static/chunks/529635a3320f1990.js","/fitflow/_next/static/chunks/d2be314c3ece3fbe.js"],"default"]
+0:{"buildId":"jOROaHyNJFbVSvx9mYnjY","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
