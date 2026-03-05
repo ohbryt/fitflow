@@ -1,4 +1,4 @@
 1:"$Sreact.fragment"
 2:I[39756,["/fitflow/_next/static/chunks/9da6a23a5c21b4ce.js","/fitflow/_next/static/chunks/d2be314c3ece3fbe.js"],"default"]
 3:I[37457,["/fitflow/_next/static/chunks/9da6a23a5c21b4ce.js","/fitflow/_next/static/chunks/d2be314c3ece3fbe.js"],"default"]
-0:{"buildId":"CZWOQUTlhiY9kFMp7e6Ci","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"2H7PhLrIdoL7R01VV1ltK","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
