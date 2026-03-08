@@ -25,15 +25,15 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
-      <body className="min-h-screen pb-24">
-        <main className="max-w-lg mx-auto px-4 pt-8">
+      <body className="min-h-screen">
+        <BottomNav />
+        <main className="max-w-lg mx-auto px-4 pt-[calc(52px+env(safe-area-inset-top)+16px)] pb-8">
           <AuthWrapper>{children}</AuthWrapper>
         </main>
         {/* Footer */}
-        <footer className="text-center py-6 pb-28 text-xs text-text-muted/60 font-medium tracking-wide">
+        <footer className="text-center py-6 pb-8 text-xs text-text-muted/60 font-medium tracking-wide">
           © {new Date().getFullYear()} Brown Bioteck Inc.
         </footer>
-        <BottomNav />
       </body>
     </html>
   );

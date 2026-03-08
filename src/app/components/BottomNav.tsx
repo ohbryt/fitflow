@@ -59,23 +59,23 @@ export function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-4 left-4 right-4 z-50">
-      <div className="max-w-lg mx-auto glass-strong rounded-2xl">
-        <div className="flex justify-around items-center h-[60px] px-1">
+    <nav className="fixed top-0 left-0 right-0 z-50">
+      <div className="max-w-lg mx-auto glass-strong backdrop-blur-xl border-b border-white/10 pt-[env(safe-area-inset-top)]">
+        <div className="flex justify-around items-center h-[52px] px-1">
           {navItems.map((item) => {
             const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative flex flex-col items-center justify-center gap-0.5 w-14 h-12 rounded-xl transition-all duration-200 ${
+                className={`relative flex flex-col items-center justify-center gap-0.5 w-14 h-11 rounded-xl transition-all duration-200 ${
                   isActive
                     ? "text-primary"
                     : "text-text-muted/70 hover:text-text-secondary active:scale-95"
                 }`}
               >
                 {isActive && (
-                  <div className="absolute -top-0.5 w-5 h-[3px] bg-primary rounded-full animate-fade-in" />
+                  <div className="absolute -bottom-0.5 w-5 h-[3px] bg-primary rounded-full animate-fade-in" />
                 )}
                 {isActive && (
                   <div className="absolute inset-0 bg-primary/[0.07] rounded-xl animate-fade-in" />
