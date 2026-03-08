@@ -29,7 +29,9 @@ const SPLIT_PROGRAMS = [
     name: "Push / Pull / Legs",
     desc: "밀기·당기기·하체 3분할, 주 3~6일",
     level: "중급",
-    color: "from-orange-100 to-amber-50",
+    gradient: "from-orange-500/20 to-amber-500/10",
+    accent: "text-orange-400",
+    accentBg: "bg-orange-500/10 border-orange-500/20",
     emoji: "🔥",
     who: "중급 이상, 근비대 목표, 주 4~6일 가능한 분",
     schedule: "Push → Pull → Legs → 반복 (주 3~6일)",
@@ -45,7 +47,9 @@ const SPLIT_PROGRAMS = [
     name: "Upper / Lower",
     desc: "상체·하체 2분할, 주 4일",
     level: "초급~중급",
-    color: "from-emerald-100 to-green-50",
+    gradient: "from-emerald-500/20 to-cyan-500/10",
+    accent: "text-emerald-400",
+    accentBg: "bg-emerald-500/10 border-emerald-500/20",
     emoji: "⚡",
     who: "초급~중급, 주 4일 운동 가능한 분, 근력+근비대 균형",
     schedule: "Upper → Lower → 휴식 → Upper → Lower → 휴식 (주 4일)",
@@ -62,7 +66,9 @@ const SPLIT_PROGRAMS = [
     name: "Full Body",
     desc: "전신 운동, 주 3일",
     level: "초급",
-    color: "from-amber-100 to-yellow-50",
+    gradient: "from-amber-500/20 to-yellow-500/10",
+    accent: "text-amber-400",
+    accentBg: "bg-amber-500/10 border-amber-500/20",
     emoji: "💪",
     who: "입문자, 시간이 부족한 직장인, 주 3일만 가능한 분",
     schedule: "월 · 수 · 금 (격일, 주 3일)",
@@ -78,7 +84,9 @@ const SPLIT_PROGRAMS = [
     name: "Bro Split",
     desc: "부위별 1일 1부위, 주 5일",
     level: "중급~고급",
-    color: "from-rose-100 to-pink-50",
+    gradient: "from-purple-500/20 to-pink-500/10",
+    accent: "text-purple-400",
+    accentBg: "bg-purple-500/10 border-purple-500/20",
     emoji: "🏆",
     who: "중급~고급, 한 부위를 깊게 파고싶은 분, 주 5일 가능",
     schedule: "가슴 → 등 → 어깨 → 팔 → 하체 (주 5일)",
@@ -118,74 +126,84 @@ export default function HomePage() {
   return (
     <div className="space-y-8 animate-slide-up">
       {/* Hero */}
-      <div className="relative overflow-hidden rounded-3xl p-6 pb-7 glass-dark">
+      <div className="relative overflow-hidden rounded-3xl p-6 pb-8 mesh-gradient border border-white/[0.06]">
+        {/* Dot pattern overlay */}
+        <div className="absolute inset-0 dot-grid opacity-40" />
+        {/* Decorative orbs */}
+        <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-primary/15 blur-3xl animate-glow-pulse" />
+        <div className="absolute -bottom-12 -left-12 w-36 h-36 rounded-full bg-accent/10 blur-3xl" />
+        <div className="absolute top-1/2 right-8 w-24 h-24 rounded-full bg-secondary/10 blur-2xl" />
+
         <div className="relative z-10">
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 mb-5">
             {stats && stats.streak > 0 && (
               <div className="streak-fire animate-scale-in">
                 🔥 {stats.streak}일 연속
               </div>
             )}
           </div>
-          <h1 className="text-[42px] font-black tracking-tight leading-none">
-            <span className="text-white">Fit</span><span className="text-primary-light">Flow</span>
+          <h1 className="text-[46px] font-black tracking-tight leading-none">
+            <span className="gradient-text">Fit</span><span className="text-white">Flow</span>
           </h1>
-          <p className="text-white/60 mt-2.5 text-sm leading-relaxed">
+          <p className="text-zinc-400 mt-3 text-sm leading-relaxed">
             스마트 운동 가이드 & 트래커<br/>
-            <span className="text-white/40">36개 운동 · 상세 자세 가이드 · 영상 튜토리얼</span>
+            <span className="text-zinc-500">36개 운동 · 상세 자세 가이드 · 영상 튜토리얼</span>
           </p>
-          <div className="flex gap-3 mt-6">
-            <Link href="/workout" className="px-6 py-3 bg-primary hover:bg-primary-dark text-white rounded-2xl text-sm font-bold active:scale-[0.96] shadow-lg shadow-primary/30 transition-all">
+          <div className="flex gap-3 mt-7">
+            <Link href="/workout" className="btn-neon px-6 py-3 bg-gradient-to-r from-primary to-primary-dark hover:from-primary-light hover:to-primary text-white rounded-2xl text-sm font-bold active:scale-[0.96] shadow-lg shadow-primary/20 transition-all">
               운동 시작하기
             </Link>
-            <Link href="/exercises" className="px-6 py-3 bg-white/10 hover:bg-white/15 text-white/90 rounded-2xl text-sm font-semibold active:scale-[0.96] backdrop-blur-sm border border-white/10">
+            <Link href="/exercises" className="px-6 py-3 bg-white/[0.06] hover:bg-white/[0.1] text-zinc-300 rounded-2xl text-sm font-semibold active:scale-[0.96] border border-white/[0.08] hover:border-white/[0.15] transition-all">
               운동 배우기
             </Link>
           </div>
         </div>
-        <div className="absolute -top-12 -right-12 w-40 h-40 rounded-full bg-primary/20 blur-3xl" />
-        <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-accent/15 blur-3xl" />
-        <div className="absolute top-4 right-4 w-20 h-20 rounded-full bg-primary-light/10 blur-2xl" />
       </div>
 
       {/* Quick Access */}
-      <div className="grid grid-cols-4 gap-2.5">
-        {[
-          { href: "/videos", emoji: "🎬", label: "운동 영상" },
-          { href: "/plans", emoji: "🤖", label: "AI 플랜" },
-          { href: "/atlas", emoji: "🧬", label: "근육 아틀라스" },
-          { href: "/gym-mode", emoji: "📱", label: "짐 모드" },
-          { href: "/nearby", emoji: "📍", label: "주변 헬스장" },
-          { href: "/equipment", emoji: "🏋️", label: "기구 가이드" },
-          { href: "/community", emoji: "🏘️", label: "동네" },
-          { href: "/music", emoji: "🎵", label: "운동 음악" },
-          { href: "/health", emoji: "❤️", label: "건강 관리" },
-          { href: "/diet", emoji: "🍱", label: "식단" },
-          { href: "/scanner", emoji: "📸", label: "AI 스캔" },
-          { href: "/calendar", emoji: "📅", label: "캘린더" },
-        ].map(item => (
-          <Link key={item.href} href={item.href}>
-            <div className="glass rounded-2xl p-3 text-center card-hover active:scale-[0.95] group">
-              <div className="text-2xl mb-1.5 group-hover:animate-float">{item.emoji}</div>
-              <p className="text-[10px] font-bold text-text-secondary">{item.label}</p>
-            </div>
-          </Link>
-        ))}
+      <div>
+        <h2 className="text-base font-bold mb-3 text-zinc-300">빠른 접근</h2>
+        <div className="grid grid-cols-4 gap-2">
+          {[
+            { href: "/videos", emoji: "🎬", label: "운동 영상", glow: "hover:shadow-orange-500/10" },
+            { href: "/plans", emoji: "🤖", label: "AI 플랜", glow: "hover:shadow-cyan-500/10" },
+            { href: "/atlas", emoji: "🧬", label: "근육 아틀라스", glow: "hover:shadow-purple-500/10" },
+            { href: "/gym-mode", emoji: "📱", label: "짐 모드", glow: "hover:shadow-emerald-500/10" },
+            { href: "/nearby", emoji: "📍", label: "주변 헬스장", glow: "hover:shadow-blue-500/10" },
+            { href: "/equipment", emoji: "🏋️", label: "기구 가이드", glow: "hover:shadow-amber-500/10" },
+            { href: "/community", emoji: "🏘️", label: "동네", glow: "hover:shadow-pink-500/10" },
+            { href: "/music", emoji: "🎵", label: "운동 음악", glow: "hover:shadow-violet-500/10" },
+            { href: "/health", emoji: "❤️", label: "건강 관리", glow: "hover:shadow-red-500/10" },
+            { href: "/diet", emoji: "🍱", label: "식단", glow: "hover:shadow-lime-500/10" },
+            { href: "/scanner", emoji: "📸", label: "AI 스캔", glow: "hover:shadow-sky-500/10" },
+            { href: "/calendar", emoji: "📅", label: "캘린더", glow: "hover:shadow-teal-500/10" },
+          ].map(item => (
+            <Link key={item.href} href={item.href}>
+              <div className={`rounded-2xl p-3 text-center card-hover active:scale-[0.95] group bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.1] hover:bg-white/[0.06] hover:shadow-lg ${item.glow} transition-all`}>
+                <div className="text-xl mb-1.5 group-hover:animate-float">{item.emoji}</div>
+                <p className="text-[10px] font-semibold text-zinc-400 group-hover:text-zinc-200">{item.label}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
       {/* Stats Grid */}
-      <div className="stagger grid grid-cols-2 gap-3">
-        <StatCard emoji="🔥" label="연속 운동" value={stats?.streak ?? 0} unit="일" index={0} />
-        <StatCard emoji="📅" label="이번 주" value={stats?.thisWeekWorkouts ?? 0} unit="회" index={1} />
-        <StatCard emoji="🏆" label="총 운동" value={stats?.totalWorkouts ?? 0} unit="회" index={2} />
-        <StatCard emoji="⚡" label="총 볼륨" value={stats ? (stats.totalVolume / 1000).toFixed(1) : "0"} unit="톤" index={3} />
+      <div>
+        <h2 className="text-base font-bold mb-3 text-zinc-300">나의 기록</h2>
+        <div className="stagger grid grid-cols-2 gap-3">
+          <StatCard emoji="🔥" label="연속 운동" value={stats?.streak ?? 0} unit="일" index={0} />
+          <StatCard emoji="📅" label="이번 주" value={stats?.thisWeekWorkouts ?? 0} unit="회" index={1} />
+          <StatCard emoji="🏆" label="총 운동" value={stats?.totalWorkouts ?? 0} unit="회" index={2} />
+          <StatCard emoji="⚡" label="총 볼륨" value={stats ? (stats.totalVolume / 1000).toFixed(1) : "0"} unit="톤" index={3} />
+        </div>
       </div>
 
       {/* Featured Exercises */}
       <div>
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-bold">오늘의 추천 운동</h2>
-          <Link href="/exercises" className="text-xs text-primary font-medium">전체 보기 →</Link>
+          <h2 className="text-base font-bold text-zinc-300">오늘의 추천 운동</h2>
+          <Link href="/exercises" className="text-xs text-primary font-medium hover:text-primary-light">전체 보기 →</Link>
         </div>
         <div className="stagger grid grid-cols-2 gap-3">
           {featuredExercises.map((ex) => {
@@ -193,11 +211,11 @@ export default function HomePage() {
             const diffInfo = DIFFICULTY_LABELS[ex.difficulty as Difficulty];
             return (
               <Link key={ex.id} href={`/exercises/${ex.id}`}>
-                <div className="glass gradient-border rounded-2xl p-4 hover:bg-orange-50/60 active:scale-[0.97] h-full group">
+                <div className="rounded-2xl p-4 bg-white/[0.03] border border-white/[0.06] hover:border-primary/20 hover:bg-white/[0.05] active:scale-[0.97] h-full group transition-all">
                   <div className="text-2xl mb-3 group-hover:animate-float">{muscleInfo?.emoji ?? "💪"}</div>
-                  <p className="font-bold text-sm">{ex.name_ko}</p>
-                  <p className="text-[10px] text-text-muted mt-0.5">{muscleInfo?.label} · {ex.primary_muscles[0]}</p>
-                  <span className={`inline-block mt-2.5 px-2 py-0.5 rounded-full text-[10px] font-bold ${diffInfo?.color} bg-white/5`}>
+                  <p className="font-bold text-sm text-zinc-200">{ex.name_ko}</p>
+                  <p className="text-[10px] text-zinc-500 mt-0.5">{muscleInfo?.label} · {ex.primary_muscles[0]}</p>
+                  <span className={`inline-block mt-2.5 px-2 py-0.5 rounded-full text-[10px] font-bold ${diffInfo?.color} bg-white/[0.05]`}>
                     {diffInfo?.label}
                   </span>
                 </div>
@@ -208,34 +226,34 @@ export default function HomePage() {
       </div>
 
       {/* Training Tip */}
-      <div className="relative overflow-hidden rounded-2xl p-5 bg-gradient-to-br from-amber-50 to-orange-50 glass gradient-border">
+      <div className="relative overflow-hidden rounded-2xl p-5 bg-gradient-to-br from-primary/10 to-amber-500/5 border border-primary/10">
         <div className="flex items-start gap-3 relative z-10">
           <span className="text-3xl">{BEGINNER_TIPS[tipIdx].icon}</span>
           <div className="flex-1">
             <p className="text-xs text-primary font-semibold mb-1">오늘의 운동 팁</p>
-            <h3 className="font-bold">{BEGINNER_TIPS[tipIdx].title}</h3>
-            <p className="text-sm text-text-muted mt-1.5 leading-relaxed">{BEGINNER_TIPS[tipIdx].desc}</p>
+            <h3 className="font-bold text-zinc-200">{BEGINNER_TIPS[tipIdx].title}</h3>
+            <p className="text-sm text-zinc-400 mt-1.5 leading-relaxed">{BEGINNER_TIPS[tipIdx].desc}</p>
           </div>
         </div>
         <button
           onClick={() => setTipIdx((tipIdx + 1) % BEGINNER_TIPS.length)}
-          className="mt-4 text-xs text-primary font-semibold hover:text-primary-dark relative z-10"
+          className="mt-4 text-xs text-primary font-semibold hover:text-primary-light relative z-10"
         >
           다음 팁 →
         </button>
-        <div className="absolute -top-6 -right-6 w-20 h-20 rounded-full bg-amber-500/10 blur-xl" />
+        <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-primary/10 blur-2xl" />
       </div>
 
       {/* Beginner Guide */}
       <div>
-        <h2 className="text-lg font-bold mb-4">초보자 필수 가이드</h2>
+        <h2 className="text-base font-bold mb-4 text-zinc-300">초보자 필수 가이드</h2>
         <div className="stagger space-y-2">
           {BEGINNER_TIPS.map((tip, i) => (
-            <div key={i} className="glass rounded-xl p-4 flex items-start gap-3 hover:bg-orange-50/60 active:scale-[0.99]">
-              <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-lg shrink-0">{tip.icon}</div>
+            <div key={i} className="rounded-xl p-4 flex items-start gap-3 bg-white/[0.02] border border-white/[0.05] hover:border-white/[0.1] hover:bg-white/[0.04] active:scale-[0.99] transition-all">
+              <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center text-lg shrink-0">{tip.icon}</div>
               <div>
-                <p className="font-semibold text-sm">{tip.title}</p>
-                <p className="text-xs text-text-muted mt-0.5 leading-relaxed">{tip.desc}</p>
+                <p className="font-semibold text-sm text-zinc-200">{tip.title}</p>
+                <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">{tip.desc}</p>
               </div>
             </div>
           ))}
@@ -244,47 +262,45 @@ export default function HomePage() {
 
       {/* Split Programs */}
       <div>
-        <h2 className="text-lg font-bold mb-4">추천 분할 프로그램</h2>
+        <h2 className="text-base font-bold mb-4 text-zinc-300">추천 분할 프로그램</h2>
         <div className="stagger space-y-3">
           {SPLIT_PROGRAMS.map((prog, i) => {
             const isOpen = openSplit === i;
             return (
-              <div key={i} className={`relative overflow-hidden rounded-2xl bg-gradient-to-r ${prog.color} glass gradient-border transition-all`}>
+              <div key={i} className={`relative overflow-hidden rounded-2xl bg-gradient-to-r ${prog.gradient} border border-white/[0.06] transition-all`}>
                 <button onClick={() => setOpenSplit(isOpen ? null : i)} className="w-full text-left p-5 relative z-10">
                   <div className="flex justify-between items-start">
                     <div className="flex items-start gap-2.5">
                       <span className="text-2xl">{prog.emoji}</span>
                       <div>
-                        <h3 className="font-bold text-sm">{prog.name}</h3>
-                        <p className="text-xs text-text-muted mt-0.5">{prog.desc}</p>
+                        <h3 className="font-bold text-sm text-zinc-200">{prog.name}</h3>
+                        <p className="text-xs text-zinc-500 mt-0.5">{prog.desc}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
-                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white/10 text-primary">{prog.level}</span>
-                      <span className={`text-text-muted text-xs transition-transform ${isOpen ? "rotate-180" : ""}`}>▼</span>
+                      <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold border ${prog.accentBg} ${prog.accent}`}>{prog.level}</span>
+                      <span className={`text-zinc-500 text-xs transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>▼</span>
                     </div>
                   </div>
                 </button>
 
                 {isOpen && (
                   <div className="px-5 pb-5 space-y-4 animate-slide-up relative z-10">
-                    {/* Who & Schedule */}
-                    <div className="glass rounded-xl p-3 space-y-1.5">
-                      <p className="text-xs"><span className="font-bold text-primary">👤 추천 대상</span> {prog.who}</p>
-                      <p className="text-xs"><span className="font-bold text-primary">📅 스케줄</span> {prog.schedule}</p>
+                    <div className="rounded-xl p-3 space-y-1.5 bg-white/[0.03] border border-white/[0.05]">
+                      <p className="text-xs text-zinc-300"><span className={`font-bold ${prog.accent}`}>👤 추천 대상</span> {prog.who}</p>
+                      <p className="text-xs text-zinc-300"><span className={`font-bold ${prog.accent}`}>📅 스케줄</span> {prog.schedule}</p>
                     </div>
 
-                    {/* Day-by-day breakdown */}
                     {prog.days.map((d, di) => (
-                      <div key={di} className="glass rounded-xl p-3">
+                      <div key={di} className="rounded-xl p-3 bg-white/[0.03] border border-white/[0.05]">
                         <div className="flex items-center justify-between mb-2">
-                          <p className="text-xs font-black text-primary">{d.day}</p>
-                          <p className="text-[10px] text-text-muted">{d.muscles}</p>
+                          <p className={`text-xs font-black ${prog.accent}`}>{d.day}</p>
+                          <p className="text-[10px] text-zinc-500">{d.muscles}</p>
                         </div>
                         <div className="space-y-1">
                           {d.exercises.map((ex, ei) => (
-                            <div key={ei} className="flex items-center gap-2 text-xs">
-                              <span className="w-4 h-4 rounded-full bg-primary/10 text-primary text-[9px] font-bold flex items-center justify-center shrink-0">{ei + 1}</span>
+                            <div key={ei} className="flex items-center gap-2 text-xs text-zinc-400">
+                              <span className={`w-4 h-4 rounded-full bg-white/[0.05] ${prog.accent} text-[9px] font-bold flex items-center justify-center shrink-0`}>{ei + 1}</span>
                               <span>{ex}</span>
                             </div>
                           ))}
@@ -292,18 +308,17 @@ export default function HomePage() {
                       </div>
                     ))}
 
-                    {/* Pros & Cons */}
                     <div className="grid grid-cols-2 gap-2">
-                      <div className="glass rounded-xl p-3">
-                        <p className="text-[10px] font-bold text-emerald-600 mb-1.5">✅ 장점</p>
+                      <div className="rounded-xl p-3 bg-white/[0.03] border border-white/[0.05]">
+                        <p className="text-[10px] font-bold text-emerald-400 mb-1.5">✅ 장점</p>
                         {prog.pros.map((p, pi) => (
-                          <p key={pi} className="text-[10px] text-text-muted leading-relaxed">· {p}</p>
+                          <p key={pi} className="text-[10px] text-zinc-500 leading-relaxed">· {p}</p>
                         ))}
                       </div>
-                      <div className="glass rounded-xl p-3">
-                        <p className="text-[10px] font-bold text-red-500 mb-1.5">⚠️ 단점</p>
+                      <div className="rounded-xl p-3 bg-white/[0.03] border border-white/[0.05]">
+                        <p className="text-[10px] font-bold text-red-400 mb-1.5">⚠️ 단점</p>
                         {prog.cons.map((c, ci) => (
-                          <p key={ci} className="text-[10px] text-text-muted leading-relaxed">· {c}</p>
+                          <p key={ci} className="text-[10px] text-zinc-500 leading-relaxed">· {c}</p>
                         ))}
                       </div>
                     </div>
@@ -315,33 +330,33 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* 🎬 인기 운동 영상 */}
+      {/* Popular Videos */}
       <div>
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-bold">🎬 인기 운동 영상</h2>
-          <Link href="/videos" className="text-xs text-primary font-medium">전체 보기 →</Link>
+          <h2 className="text-base font-bold text-zinc-300">🎬 인기 운동 영상</h2>
+          <Link href="/videos" className="text-xs text-primary font-medium hover:text-primary-light">전체 보기 →</Link>
         </div>
         <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-1 px-1">
           {FITNESS_VIDEOS.slice(0, 6).map((video) => {
             const catInfo = VIDEO_CATEGORIES[video.category];
             return (
               <Link key={video.id} href="/videos" className="shrink-0 w-[200px] group">
-                <div className="glass gradient-border rounded-2xl overflow-hidden hover:bg-orange-50/60 active:scale-[0.97]">
+                <div className="rounded-2xl overflow-hidden bg-white/[0.03] border border-white/[0.06] hover:border-white/[0.12] active:scale-[0.97] transition-all">
                   <div className="relative aspect-video">
                     <img
                       src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`}
                       alt={video.title}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="w-10 h-10 rounded-full bg-red-600/90 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-full bg-primary/90 flex items-center justify-center shadow-lg shadow-primary/30">
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z"/>
                         </svg>
                       </div>
                     </div>
-                    <div className={`absolute top-1.5 left-1.5 bg-gradient-to-r ${catInfo.color} backdrop-blur-sm px-1.5 py-0.5 rounded-md`}>
+                    <div className="absolute top-1.5 left-1.5 bg-black/60 backdrop-blur-sm px-1.5 py-0.5 rounded-md border border-white/10">
                       <span className="text-[8px] font-bold text-white">{catInfo.emoji} {catInfo.label}</span>
                     </div>
                     {video.duration && (
@@ -351,8 +366,8 @@ export default function HomePage() {
                     )}
                   </div>
                   <div className="p-2.5">
-                    <p className="text-[11px] font-bold leading-snug line-clamp-2">{video.title}</p>
-                    <p className="text-[9px] text-text-muted mt-1">{video.channel}</p>
+                    <p className="text-[11px] font-bold leading-snug line-clamp-2 text-zinc-300">{video.title}</p>
+                    <p className="text-[9px] text-zinc-500 mt-1">{video.channel}</p>
                   </div>
                 </div>
               </Link>
@@ -361,31 +376,32 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* 🤖 AI 운동 플랜 */}
+      {/* AI Plans */}
       <div>
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-bold">🤖 AI 운동 플랜</h2>
-          <Link href="/plans" className="text-xs text-primary font-medium">전체 보기 →</Link>
+          <h2 className="text-base font-bold text-zinc-300">🤖 AI 운동 플랜</h2>
+          <Link href="/plans" className="text-xs text-primary font-medium hover:text-primary-light">전체 보기 →</Link>
         </div>
         <div className="stagger space-y-3">
           {AI_WORKOUT_PLANS.slice(0, 2).map((plan) => (
             <Link key={plan.id} href="/plans">
-              <div className={`relative overflow-hidden rounded-2xl p-4 bg-gradient-to-r ${plan.color} glass gradient-border hover:scale-[0.99] active:scale-[0.97] transition-all group`}>
+              <div className="relative overflow-hidden rounded-2xl p-4 bg-gradient-to-r from-primary/10 to-accent/5 border border-white/[0.06] hover:border-primary/20 hover:scale-[0.99] active:scale-[0.97] transition-all group">
                 <div className="flex items-start gap-3 relative z-10">
                   <span className="text-3xl group-hover:animate-float">{plan.emoji}</span>
                   <div className="flex-1">
-                    <h3 className="font-bold text-sm">{plan.name}</h3>
-                    <p className="text-[11px] text-text-muted mt-1 line-clamp-1">{plan.description}</p>
+                    <h3 className="font-bold text-sm text-zinc-200">{plan.name}</h3>
+                    <p className="text-[11px] text-zinc-500 mt-1 line-clamp-1">{plan.description}</p>
                     <div className="flex items-center gap-1.5 mt-2">
-                      <span className="px-2 py-0.5 rounded-full bg-white/10 text-[9px] font-bold text-primary">
+                      <span className="px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-[9px] font-bold text-primary">
                         {plan.level === "beginner" ? "초급" : plan.level === "intermediate" ? "중급" : "고급"}
                       </span>
-                      <span className="text-[9px] text-text-muted">📅 {plan.duration}</span>
-                      <span className="text-[9px] text-text-muted">🔄 {plan.frequency}</span>
+                      <span className="text-[9px] text-zinc-500">📅 {plan.duration}</span>
+                      <span className="text-[9px] text-zinc-500">🔄 {plan.frequency}</span>
                     </div>
                   </div>
-                  <span className="text-text-muted text-sm mt-1">→</span>
+                  <span className="text-zinc-600 text-sm mt-1 group-hover:text-primary transition-colors">→</span>
                 </div>
+                <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-primary/5 blur-2xl" />
               </div>
             </Link>
           ))}
@@ -394,16 +410,16 @@ export default function HomePage() {
 
       {/* Muscle Group Quick Access */}
       <div>
-        <h2 className="text-lg font-bold mb-4">부위별 운동</h2>
-        <div className="grid grid-cols-4 gap-2.5">
+        <h2 className="text-base font-bold mb-4 text-zinc-300">부위별 운동</h2>
+        <div className="grid grid-cols-4 gap-2">
           {(Object.entries(MUSCLE_GROUPS) as [MuscleGroup, { label: string; emoji: string }][]).map(([key, { label, emoji }]) => {
             const count = EXERCISES.filter(e => e.muscle_group === key).length;
             return (
               <Link key={key} href={`/exercises?muscle=${key}`}>
-                <div className="glass gradient-border rounded-2xl p-3 text-center hover:bg-orange-50/60 active:scale-[0.95] group">
-                  <div className="text-2xl mb-1.5 group-hover:animate-float">{emoji}</div>
-                  <p className="text-xs font-bold">{label}</p>
-                  <p className="text-[10px] text-text-muted mt-0.5">{count}개</p>
+                <div className="rounded-2xl p-3 text-center bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.1] hover:bg-white/[0.06] active:scale-[0.95] group transition-all">
+                  <div className="text-xl mb-1.5 group-hover:animate-float">{emoji}</div>
+                  <p className="text-xs font-bold text-zinc-300">{label}</p>
+                  <p className="text-[10px] text-zinc-600 mt-0.5">{count}개</p>
                 </div>
               </Link>
             );
@@ -411,7 +427,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Bottom spacing for floating nav */}
+      {/* Bottom spacing */}
       <div className="h-8" />
     </div>
   );
