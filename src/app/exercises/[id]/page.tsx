@@ -47,20 +47,20 @@ export default function ExerciseDetailPage() {
       {/* Header */}
       <div className="relative overflow-hidden glass gradient-border rounded-2xl p-5">
         <div className="flex items-start gap-4 relative z-10">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/30 to-violet-500/20 flex items-center justify-center text-2xl shrink-0 animate-float">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-200 to-amber-100 flex items-center justify-center text-2xl shrink-0 animate-float">
             {muscleInfo?.emoji ?? "💪"}
           </div>
           <div className="flex-1 min-w-0">
             <h1 className="text-xl font-black">{exercise.name_ko}</h1>
             <p className="text-sm text-text-muted mt-0.5">{exercise.name}</p>
             <div className="flex flex-wrap gap-2 mt-3">
-              <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${diffInfo?.color} bg-white/5`}>
+              <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${diffInfo?.color} bg-orange-50/80`}>
                 {diffInfo?.label}
               </span>
               <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/15 text-primary">
                 {muscleInfo?.label}
               </span>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/5 text-text-muted">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-50/80 text-text-muted">
                 {EQUIPMENT_LABELS[exercise.equipment] || exercise.equipment}
               </span>
             </div>
@@ -96,7 +96,7 @@ export default function ExerciseDetailPage() {
               <p className="text-xs text-text-muted mb-1.5 font-medium">보조근</p>
               <div className="flex flex-wrap gap-1.5">
                 {exercise.secondary_muscles.map((m, i) => (
-                  <span key={i} className="px-3 py-1.5 bg-white/5 text-text-muted rounded-lg text-sm">{m}</span>
+                  <span key={i} className="px-3 py-1.5 bg-orange-50/80 text-text-muted rounded-lg text-sm">{m}</span>
                 ))}
               </div>
             </div>
@@ -107,9 +107,9 @@ export default function ExerciseDetailPage() {
       {/* Recommended */}
       <div className="grid grid-cols-3 gap-3">
         {[
-          { label: "세트", value: exercise.recommended_sets, grad: "from-indigo-500/15 to-violet-500/5" },
-          { label: "반복", value: exercise.recommended_reps, grad: "from-emerald-500/15 to-teal-500/5" },
-          { label: "휴식", value: `${exercise.rest_seconds}초`, grad: "from-amber-500/15 to-orange-500/5" },
+          { label: "세트", value: exercise.recommended_sets, grad: "from-orange-100 to-amber-50" },
+          { label: "반복", value: exercise.recommended_reps, grad: "from-emerald-100 to-green-50" },
+          { label: "휴식", value: `${exercise.rest_seconds}초`, grad: "from-amber-100 to-yellow-50" },
         ].map((item, i) => (
           <div key={i} className={`relative overflow-hidden glass gradient-border rounded-2xl p-4 text-center bg-gradient-to-br ${item.grad}`}>
             <p className="text-[10px] text-text-muted mb-1 font-semibold">{item.label}</p>
@@ -150,7 +150,7 @@ export default function ExerciseDetailPage() {
             <ol className="space-y-3">
               {exercise.how_to.map((step, i) => (
                 <li key={i} className="flex gap-3">
-                  <span className="w-7 h-7 rounded-full bg-gradient-to-br from-primary/30 to-violet-500/20 text-primary flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+                  <span className="w-7 h-7 rounded-full bg-gradient-to-br from-orange-200 to-amber-100 text-primary flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
                     {i + 1}
                   </span>
                   <p className="text-sm leading-relaxed flex-1">{step}</p>
@@ -205,7 +205,7 @@ export default function ExerciseDetailPage() {
                   {alt} →
                 </Link>
               ) : (
-                <span key={i} className="px-3 py-2 bg-white/5 text-text-muted rounded-xl text-sm">{alt}</span>
+                <span key={i} className="px-3 py-2 bg-orange-50/80 text-text-muted rounded-xl text-sm">{alt}</span>
               );
             })}
           </div>

@@ -16,8 +16,13 @@ export default function DashboardPage() {
   const totalMuscleCount = stats.muscleDistribution.reduce((s, m) => s + m.count, 0) || 1;
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold">대시보드</h1>
+    <div className="space-y-6 animate-slide-up">
+      <div className="flex items-center gap-3">
+        <a href="/" className="w-9 h-9 glass rounded-xl flex items-center justify-center hover:bg-orange-50 shrink-0">
+          <span className="text-lg">←</span>
+        </a>
+        <h1 className="text-xl sm:text-2xl font-bold">대시보드</h1>
+      </div>
       <div className="grid grid-cols-2 gap-3">
         <StatCard emoji="🔥" label="연속 운동" value={stats.streak} unit="일" />
         <StatCard emoji="📅" label="이번 주" value={stats.thisWeekWorkouts} unit="회" />

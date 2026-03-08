@@ -78,7 +78,7 @@ export interface DashboardStats {
   streak: number;
 }
 
-export type MuscleGroup = "chest" | "back" | "shoulders" | "legs" | "arms" | "core" | "cardio";
+export type MuscleGroup = "chest" | "back" | "shoulders" | "legs" | "arms" | "core" | "cardio" | "pilates" | "yoga";
 
 export const MUSCLE_GROUPS: Record<MuscleGroup, { label: string; emoji: string }> = {
   chest: { label: "가슴", emoji: "💪" },
@@ -88,6 +88,8 @@ export const MUSCLE_GROUPS: Record<MuscleGroup, { label: string; emoji: string }
   arms: { label: "팔", emoji: "💪" },
   core: { label: "코어", emoji: "🎯" },
   cardio: { label: "유산소", emoji: "🏃" },
+  pilates: { label: "필라테스", emoji: "🤸" },
+  yoga: { label: "요가", emoji: "🧘" },
 };
 
 export const EQUIPMENT_LABELS: Record<string, string> = {
@@ -101,6 +103,11 @@ export const EQUIPMENT_LABELS: Record<string, string> = {
   ez_bar: "EZ바",
   kettlebell: "케틀벨",
   band: "밴드",
+  mat: "매트",
+  yoga_block: "요가 블록",
+  foam_roller: "폼롤러",
+  pilates_ball: "필라테스 볼",
+  pilates_ring: "필라테스 링",
 };
 
 export const DIFFICULTY_LABELS: Record<Difficulty, { label: string; color: string }> = {

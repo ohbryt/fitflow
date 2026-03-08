@@ -9,22 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@capacitor/android": "^8.2.0",
+    "@capacitor/cli": "^8.2.0",
+    "@capacitor/core": "^8.2.0",
+    "@capacitor/geolocation": "^8.1.0",
+    "@devmaxime/capacitor-health-connect": "^1.1.0",
+    "better-sqlite3": "^11.8.1",
+    "lucide-react": "^0.474.0",
     "next": "^16.1.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "better-sqlite3": "^11.8.1",
-    "recharts": "^2.15.3",
-    "lucide-react": "^0.474.0"
+    "recharts": "^2.15.3"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^22.13.4",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
-    "@types/better-sqlite3": "^7.6.13",
-    "typescript": "^5.7.3",
-    "@tailwindcss/postcss": "^4.0.0",
-    "tailwindcss": "^4.0.0",
     "eslint": "^9.0.0",
-    "eslint-config-next": "^16.1.6"
+    "eslint-config-next": "^16.1.6",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.3"
   }
 }

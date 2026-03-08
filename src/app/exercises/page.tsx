@@ -33,9 +33,14 @@ export default function ExercisesPage() {
   return (
     <div className="space-y-5 animate-slide-up">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-black">운동 라이브러리</h1>
-        <p className="text-sm text-text-muted mt-1">36개 운동의 상세 가이드를 확인하세요</p>
+      <div className="flex items-center gap-3">
+        <Link href="/" className="w-9 h-9 glass rounded-xl flex items-center justify-center hover:bg-orange-50 shrink-0">
+          <span className="text-lg">←</span>
+        </Link>
+        <div>
+          <h1 className="text-xl sm:text-2xl font-black">운동 라이브러리</h1>
+          <p className="text-xs sm:text-sm text-text-muted mt-0.5">52개 운동의 상세 가이드를 확인하세요</p>
+        </div>
       </div>
 
       {/* Search */}
@@ -80,7 +85,7 @@ export default function ExercisesPage() {
         <button
           onClick={() => setSelectedDifficulty("")}
           className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold ${
-            !selectedDifficulty ? "bg-white/10 text-white" : "text-text-muted hover:text-text"
+            !selectedDifficulty ? "bg-orange-100 text-white" : "text-text-muted hover:text-text"
           }`}
         >
           전체 난이도
@@ -90,7 +95,7 @@ export default function ExercisesPage() {
             key={key}
             onClick={() => setSelectedDifficulty(key)}
             className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold transition-all ${
-              selectedDifficulty === key ? `bg-white/10 ${color}` : "text-text-muted hover:text-text"
+              selectedDifficulty === key ? `bg-orange-100 ${color}` : "text-text-muted hover:text-text"
             }`}
           >
             {label}
@@ -114,15 +119,15 @@ export default function ExercisesPage() {
           const diffInfo = DIFFICULTY_LABELS[ex.difficulty as Difficulty];
           return (
             <Link key={ex.id} href={`/exercises/${ex.id}`}>
-              <div className="glass gradient-border rounded-2xl p-4 hover:bg-white/5 active:scale-[0.98] group">
+              <div className="glass gradient-border rounded-2xl p-4 hover:bg-orange-50/60 active:scale-[0.98] group">
                 <div className="flex items-start gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-violet-500/10 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-200 to-amber-100 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
                     {muscleInfo?.emoji ?? "💪"}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-sm truncate">{ex.name_ko}</span>
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${diffInfo?.color} bg-white/5 shrink-0`}>
+                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${diffInfo?.color} bg-orange-50/80 shrink-0`}>
                         {diffInfo?.label}
                       </span>
                     </div>
@@ -134,13 +139,13 @@ export default function ExercisesPage() {
                         <span key={i} className="px-2 py-0.5 bg-primary/10 text-primary rounded-md text-[10px] font-medium">{m}</span>
                       ))}
                       {ex.secondary_muscles.slice(0, 2).map((m, i) => (
-                        <span key={i} className="px-2 py-0.5 bg-white/5 text-text-muted rounded-md text-[10px]">{m}</span>
+                        <span key={i} className="px-2 py-0.5 bg-orange-50/80 text-text-muted rounded-md text-[10px]">{m}</span>
                       ))}
                     </div>
 
                     {/* Quick info */}
                     <div className="flex items-center gap-2 mt-2 text-[10px] text-text-muted">
-                      <span className="px-1.5 py-0.5 rounded bg-white/5">{EQUIPMENT_LABELS[ex.equipment] || ex.equipment}</span>
+                      <span className="px-1.5 py-0.5 rounded bg-orange-50/80">{EQUIPMENT_LABELS[ex.equipment] || ex.equipment}</span>
                       <span>{ex.recommended_sets} × {ex.recommended_reps}</span>
                       <span>· 휴식 {ex.rest_seconds}초</span>
                     </div>

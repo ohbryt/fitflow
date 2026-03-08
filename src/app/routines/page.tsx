@@ -34,9 +34,12 @@ export default function RoutinesPage() {
   const handleDelete = (id: number) => { deleteRoutine(id); loadRoutines(); };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 animate-slide-up">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">루틴 관리</h1>
+        <div className="flex items-center gap-3">
+          <a href="/" className="w-9 h-9 glass rounded-xl flex items-center justify-center hover:bg-orange-50 shrink-0"><span className="text-lg">←</span></a>
+          <h1 className="text-xl sm:text-2xl font-bold">루틴 관리</h1>
+        </div>
         <button onClick={() => setShowForm(!showForm)} className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-xl text-sm font-semibold">{showForm ? "취소" : "+ 새 루틴"}</button>
       </div>
       {showForm && (

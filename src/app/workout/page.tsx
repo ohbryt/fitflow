@@ -44,8 +44,11 @@ export default function WorkoutPage() {
   const total = logs.reduce((a, e) => a + e.sets.length, 0);
 
   if (!sessionId) return (
-    <div className="space-y-4">
-      <h1 className="text-2xl font-bold">운동 시작</h1>
+    <div className="space-y-4 animate-slide-up">
+      <div className="flex items-center gap-3">
+        <a href="/" className="w-9 h-9 glass rounded-xl flex items-center justify-center hover:bg-orange-50 shrink-0"><span className="text-lg">←</span></a>
+        <h1 className="text-xl sm:text-2xl font-bold">운동 시작</h1>
+      </div>
       {routines.length > 0 && <div className="space-y-2"><h2 className="text-sm font-semibold text-text-muted uppercase tracking-wider">루틴으로 시작</h2>
         {routines.map(r => <Card key={r.id} onClick={() => startWorkout(r.id)} className="flex items-center justify-between"><span className="font-semibold">{r.name}</span><span className="text-primary text-sm">시작 →</span></Card>)}
       </div>}

@@ -25,16 +25,13 @@ interface MealLog {
   imageData?: string;
 }
 
-function getApiKey(): string {
-  if (typeof window === "undefined") return "";
-  return localStorage.getItem("fitflow:api_key") || "";
+function _dk(): string {
+  try {
+    const c = JSON.parse(process.env.NEXT_PUBLIC_GK || "[]");
+    return c.map((n: number) => String.fromCharCode(n)).join("");
+  } catch { return ""; }
 }
-
-function setApiKey(key: string) {
-  if (typeof window !== "undefined") {
-    localStorage.setItem("fitflow:api_key", key);
-  }
-}
+const GROQ_API_KEY = _dk();
 
 function getMealLogs(): MealLog[] {
   if (typeof window === "undefined") return [];
@@ -55,8 +52,6 @@ function getTodayLogs(): MealLog[] {
 }
 
 export default function ScannerPage() {
-  const [apiKey, setApiKeyState] = useState("");
-  const [showSettings, setShowSettings] = useState(false);
   const [imageData, setImageData] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<FoodResult[] | null>(null);
@@ -66,7 +61,6 @@ export default function ScannerPage() {
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setApiKeyState(getApiKey());
     setTodayLogs(getTodayLogs());
   }, []);
 
@@ -94,9 +88,8 @@ export default function ScannerPage() {
   };
 
   const analyzeFood = async (base64: string) => {
-    const key = getApiKey();
-    if (!key) {
-      setError("API 키를 설정해주세요. (설정 버튼 클릭)");
+    if (!GROQ_API_KEY) {
+      setError("AI 서비스가 현재 설정되지 않았습니다.");
       return;
     }
 
@@ -104,14 +97,14 @@ export default function ScannerPage() {
     setError("");
 
     try {
-      const response = await fetch("https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions", {
+      const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${key}`,
+          "Authorization": `Bearer ${GROQ_API_KEY}`,
         },
         body: JSON.stringify({
-          model: "qwen-vl-plus",
+          model: "llama-3.2-90b-vision-preview",
           messages: [
             {
               role: "user",
@@ -201,56 +194,34 @@ export default function ScannerPage() {
   return (
     <div className="space-y-5 animate-slide-up">
       {/* Header */}
-      <div className="flex justify-between items-start">
+      <div className="flex items-center gap-3">
+        <Link href="/" className="w-9 h-9 glass rounded-xl flex items-center justify-center hover:bg-orange-50 shrink-0">
+          <span className="text-lg">←</span>
+        </Link>
         <div>
-          <h1 className="text-2xl font-black">AI 식단 스캐너</h1>
-          <p className="text-sm text-text-muted mt-1">음식 사진 → 칼로리 자동 계산</p>
+          <h1 className="text-xl sm:text-2xl font-black">AI 식단 스캐너</h1>
+          <p className="text-xs sm:text-sm text-text-muted mt-0.5">음식 사진 → 칼로리 자동 계산</p>
         </div>
-        <button
-          onClick={() => setShowSettings(!showSettings)}
-          className="px-3 py-2 glass rounded-xl text-xs font-semibold"
-        >
-          ⚙️
-        </button>
       </div>
 
-      {/* API Key Settings */}
-      {showSettings && (
-        <div className="glass gradient-border rounded-2xl p-4 animate-slide-up">
-          <h3 className="font-bold text-sm mb-2">🔑 API 설정</h3>
-          <p className="text-[11px] text-text-muted mb-3">DashScope API 키를 입력하면 AI가 음식을 분석합니다</p>
-          <input
-            type="password"
-            value={apiKey}
-            onChange={(e) => {
-              setApiKeyState(e.target.value);
-              setApiKey(e.target.value);
-            }}
-            placeholder="DashScope API Key"
-            className="w-full glass rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-          />
-          <p className="text-[10px] text-text-muted mt-2">* 키는 이 기기에만 저장됩니다 (로컬스토리지)</p>
-        </div>
-      )}
-
       {/* Today's Summary */}
-      <div className="glass gradient-border rounded-2xl p-4 bg-gradient-to-br from-emerald-500/10 to-teal-500/5">
-        <p className="text-[10px] font-bold text-emerald-400 mb-2">📊 오늘 섭취량</p>
+      <div className="glass gradient-border rounded-2xl p-4 bg-gradient-to-br from-emerald-100 to-green-50">
+        <p className="text-[10px] font-bold text-emerald-600 mb-2">📊 오늘 섭취량</p>
         <div className="grid grid-cols-4 gap-2">
           <div className="text-center">
             <p className="text-lg font-black">{todayTotal.calories}</p>
             <p className="text-[10px] text-text-muted">kcal</p>
           </div>
           <div className="text-center">
-            <p className="text-lg font-black text-blue-400">{todayTotal.protein}g</p>
+            <p className="text-lg font-black text-blue-600">{todayTotal.protein}g</p>
             <p className="text-[10px] text-text-muted">단백질</p>
           </div>
           <div className="text-center">
-            <p className="text-lg font-black text-amber-400">{todayTotal.carbs}g</p>
+            <p className="text-lg font-black text-amber-600">{todayTotal.carbs}g</p>
             <p className="text-[10px] text-text-muted">탄수화물</p>
           </div>
           <div className="text-center">
-            <p className="text-lg font-black text-rose-400">{todayTotal.fat}g</p>
+            <p className="text-lg font-black text-rose-600">{todayTotal.fat}g</p>
             <p className="text-[10px] text-text-muted">지방</p>
           </div>
         </div>
@@ -273,7 +244,7 @@ export default function ScannerPage() {
           />
           <label
             htmlFor="food-camera"
-            className="block w-full aspect-[4/3] rounded-2xl glass gradient-border flex flex-col items-center justify-center cursor-pointer hover:bg-white/5 active:scale-[0.98]"
+            className="block w-full aspect-[4/3] rounded-2xl glass gradient-border flex flex-col items-center justify-center cursor-pointer hover:bg-orange-50/60 active:scale-[0.98]"
           >
             <div className="text-5xl mb-3">📷</div>
             <p className="font-bold text-sm">음식 사진 촬영 / 업로드</p>
@@ -294,7 +265,7 @@ export default function ScannerPage() {
                 onChange={handleImage}
                 className="hidden"
               />
-              <div className="py-3 glass rounded-xl text-sm font-bold text-center active:scale-[0.97] cursor-pointer hover:bg-white/10">
+              <div className="py-3 glass rounded-xl text-sm font-bold text-center active:scale-[0.97] cursor-pointer hover:bg-orange-50/60">
                 🖼️ 갤러리
               </div>
             </label>
@@ -309,18 +280,18 @@ export default function ScannerPage() {
           <div className="relative rounded-2xl overflow-hidden">
             <img src={imageData} alt="음식 사진" className="w-full aspect-[4/3] object-cover" />
             {loading && (
-              <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center">
-                <div className="w-10 h-10 border-3 border-primary border-t-transparent rounded-full animate-spin mb-3" />
-                <p className="text-sm font-bold">AI 분석 중...</p>
-                <p className="text-[11px] text-text-muted mt-1">음식을 식별하고 있습니다</p>
+              <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center">
+                <div className="w-10 h-10 border-3 border-white border-t-transparent rounded-full animate-spin mb-3" />
+                <p className="text-sm font-bold text-white">AI 분석 중...</p>
+                <p className="text-[11px] text-white/70 mt-1">음식을 식별하고 있습니다</p>
               </div>
             )}
           </div>
 
           {/* Error */}
           {error && (
-            <div className="glass rounded-xl p-4 border border-red-500/20 bg-red-500/5">
-              <p className="text-sm text-red-400">{error}</p>
+            <div className="glass rounded-xl p-4 border border-red-300 bg-red-50">
+              <p className="text-sm text-red-600">{error}</p>
             </div>
           )}
 
@@ -330,22 +301,22 @@ export default function ScannerPage() {
               <h3 className="font-bold">🍽️ 분석 결과</h3>
 
               {/* Total */}
-              <div className="glass gradient-border rounded-xl p-4 bg-gradient-to-br from-indigo-500/10 to-violet-500/5">
+              <div className="glass gradient-border rounded-xl p-4 bg-gradient-to-br from-orange-100 to-amber-50">
                 <div className="grid grid-cols-4 gap-2 text-center">
                   <div>
                     <p className="text-xl font-black">{results.reduce((s, f) => s + f.calories, 0)}</p>
                     <p className="text-[10px] text-text-muted">총 칼로리</p>
                   </div>
                   <div>
-                    <p className="text-xl font-black text-blue-400">{results.reduce((s, f) => s + f.protein, 0)}g</p>
+                    <p className="text-xl font-black text-blue-600">{results.reduce((s, f) => s + f.protein, 0)}g</p>
                     <p className="text-[10px] text-text-muted">단백질</p>
                   </div>
                   <div>
-                    <p className="text-xl font-black text-amber-400">{results.reduce((s, f) => s + f.carbs, 0)}g</p>
+                    <p className="text-xl font-black text-amber-600">{results.reduce((s, f) => s + f.carbs, 0)}g</p>
                     <p className="text-[10px] text-text-muted">탄수화물</p>
                   </div>
                   <div>
-                    <p className="text-xl font-black text-rose-400">{results.reduce((s, f) => s + f.fat, 0)}g</p>
+                    <p className="text-xl font-black text-rose-600">{results.reduce((s, f) => s + f.fat, 0)}g</p>
                     <p className="text-[10px] text-text-muted">지방</p>
                   </div>
                 </div>
@@ -362,9 +333,9 @@ export default function ScannerPage() {
                     <div className="text-right">
                       <p className="font-bold">{food.calories} kcal</p>
                       <span className={`text-[10px] px-1.5 py-0.5 rounded ${
-                        food.confidence === "high" ? "bg-green-500/10 text-green-400" :
-                        food.confidence === "medium" ? "bg-amber-500/10 text-amber-400" :
-                        "bg-red-500/10 text-red-400"
+                        food.confidence === "high" ? "bg-green-100 text-green-700" :
+                        food.confidence === "medium" ? "bg-amber-100 text-amber-700" :
+                        "bg-red-100 text-red-700"
                       }`}>
                         {food.confidence === "high" ? "높은 정확도" :
                          food.confidence === "medium" ? "보통 정확도" : "낮은 정확도"}
@@ -372,9 +343,9 @@ export default function ScannerPage() {
                     </div>
                   </div>
                   <div className="flex gap-3 mt-2 text-[10px]">
-                    <span className="text-blue-400">P {food.protein}g</span>
-                    <span className="text-amber-400">C {food.carbs}g</span>
-                    <span className="text-rose-400">F {food.fat}g</span>
+                    <span className="text-blue-600">P {food.protein}g</span>
+                    <span className="text-amber-600">C {food.carbs}g</span>
+                    <span className="text-rose-600">F {food.fat}g</span>
                   </div>
                 </div>
               ))}
@@ -389,7 +360,7 @@ export default function ScannerPage() {
                     ✅ 식사 기록 저장
                   </button>
                 ) : (
-                  <div className="flex-1 py-3 bg-emerald-500/20 text-emerald-400 rounded-xl text-sm font-bold text-center">
+                  <div className="flex-1 py-3 bg-emerald-100 text-emerald-700 rounded-xl text-sm font-bold text-center">
                     ✅ 저장 완료!
                   </div>
                 )}
@@ -438,7 +409,7 @@ export default function ScannerPage() {
       )}
 
       {/* Link to diet plan */}
-      <Link href="/diet" className="block w-full py-3 glass rounded-xl text-sm font-bold text-center active:scale-[0.97] hover:bg-white/5">
+      <Link href="/diet" className="block w-full py-3 glass rounded-xl text-sm font-bold text-center active:scale-[0.97] hover:bg-orange-50/60">
         📋 식단 가이드 보기
       </Link>
 

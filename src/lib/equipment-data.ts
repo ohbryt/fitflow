@@ -1,0 +1,456 @@
+// Gym Equipment Guide Data
+
+export interface Equipment {
+  id: number;
+  name: string;
+  nameKo: string;
+  emoji: string;
+  category: "machine" | "free_weight" | "cable" | "cardio_eq" | "bodyweight_eq";
+  targetMuscles: string[];
+  description: string;
+  howTo: string[];
+  tips: string[];
+  commonMistakes: string[];
+  youtubeId: string; // YouTube video ID
+  difficulty: "beginner" | "intermediate" | "advanced";
+}
+
+export const EQUIPMENT_CATEGORIES: Record<string, { label: string; emoji: string }> = {
+  machine: { label: "머신", emoji: "🏋️" },
+  free_weight: { label: "프리웨이트", emoji: "🔩" },
+  cable: { label: "케이블", emoji: "🔗" },
+  cardio_eq: { label: "유산소 기구", emoji: "🏃" },
+  bodyweight_eq: { label: "보조 기구", emoji: "🤸" },
+};
+
+export const GYM_EQUIPMENT: Equipment[] = [
+  // === 머신 (Machines) ===
+  {
+    id: 1, name: "Chest Press Machine", nameKo: "체스트 프레스 머신", emoji: "💪",
+    category: "machine", targetMuscles: ["대흉근", "삼두근", "전면 삼각근"],
+    description: "가슴 근육을 안전하게 타겟하는 머신. 초보자가 벤치프레스 전에 가슴 운동 감각을 익히기 좋습니다.",
+    howTo: [
+      "시트 높이를 조절하여 손잡이가 가슴 중앙 높이에 오도록 합니다",
+      "등을 등받이에 밀착하고 견갑골을 모읍니다",
+      "양손으로 손잡이를 잡고 숨을 내쉬며 앞으로 밀어냅니다",
+      "팔이 완전히 펴지기 직전에 멈추고, 천천히 돌아옵니다",
+      "가슴 근육의 수축과 이완을 느끼며 반복합니다",
+    ],
+    tips: [
+      "무게보다 올바른 자세와 근육 연결(마인드-머슬 커넥션)에 집중하세요",
+      "손잡이를 내릴 때 팔꿈치가 90도 이하로 내려가면 어깨에 부담이 됩니다",
+      "호흡: 밀 때 내쉬고, 당길 때 들이마셔요",
+    ],
+    commonMistakes: [
+      "엉덩이가 시트에서 뜸 — 등을 등받이에 밀착시키세요",
+      "너무 빠르게 반복 — 2초 밀고 3초 돌아오는 템포를 유지하세요",
+    ],
+    youtubeId: "xUm0BiZCWlQ", difficulty: "beginner",
+  },
+  {
+    id: 2, name: "Lat Pulldown Machine", nameKo: "랫 풀다운 머신", emoji: "🔙",
+    category: "machine", targetMuscles: ["광배근", "이두근", "대원근"],
+    description: "풀업(턱걸이)을 못하는 분도 등 근육을 효과적으로 훈련할 수 있는 필수 머신입니다.",
+    howTo: [
+      "허벅지 패드에 다리를 고정하고 앉습니다",
+      "어깨보다 넓게 바를 잡습니다 (오버그립)",
+      "가슴을 들고 살짝 뒤로 기울입니다 (10~15도)",
+      "팔꿈치를 옆구리 쪽으로 당기며 바를 쇄골 아래로 내립니다",
+      "등 근육의 수축을 느끼며 1초 정지 후 천천히 올립니다",
+    ],
+    tips: [
+      "팔로 당기지 말고 팔꿈치를 내린다는 느낌으로 하세요",
+      "바를 목 뒤로 내리는 것은 어깨 부상 위험! 항상 앞으로 내리세요",
+      "그립 너비에 따라 자극 부위가 달라집니다 (넓으면 광배근 외측, 좁으면 중앙)",
+    ],
+    commonMistakes: [
+      "몸을 너무 뒤로 젖힘 — 15도 이상 기울이면 로우 운동이 됩니다",
+      "바를 배꼽까지 내림 — 쇄골 아래에서 멈추세요",
+    ],
+    youtubeId: "CAwf7n6Luuc", difficulty: "beginner",
+  },
+  {
+    id: 3, name: "Leg Press Machine", nameKo: "레그 프레스 머신", emoji: "🦵",
+    category: "machine", targetMuscles: ["대퇴사두", "둔근", "햄스트링"],
+    description: "스쿼트의 대안으로 무거운 무게를 안전하게 하체에 실을 수 있는 머신입니다.",
+    howTo: [
+      "등과 엉덩이를 시트에 밀착시키고 앉습니다",
+      "발을 어깨너비로 발판 중앙에 놓습니다",
+      "안전 잠금장치를 해제합니다",
+      "무릎이 90도가 될 때까지 천천히 내립니다",
+      "발뒤꿈치로 밀어 시작 위치로 돌아갑니다 (무릎 완전히 펴지 않기)",
+    ],
+    tips: [
+      "발 위치에 따라 자극 부위가 달라집니다: 높이 놓으면 둔근+햄, 낮으면 대퇴사두",
+      "무릎이 안쪽으로 모이지 않도록 주의하세요",
+      "무릎을 완전히 펴면(잠그면) 관절에 큰 부담 — 살짝 구부린 상태 유지",
+    ],
+    commonMistakes: [
+      "엉덩이가 시트에서 뜸(버트 윙크) — 내리는 범위를 줄이세요",
+      "무릎 잠금(Lock-out) — 관절 보호를 위해 약간 구부린 상태 유지",
+    ],
+    youtubeId: "IZxyjW7MPJQ", difficulty: "beginner",
+  },
+  {
+    id: 4, name: "Shoulder Press Machine", nameKo: "숄더 프레스 머신", emoji: "🏋️",
+    category: "machine", targetMuscles: ["전면 삼각근", "측면 삼각근", "삼두근"],
+    description: "어깨 근육을 안전하게 강화하는 머신. 프리웨이트 OHP 전에 감각을 익히기 좋습니다.",
+    howTo: [
+      "시트를 조절하여 손잡이가 어깨 높이에 오도록 합니다",
+      "등을 등받이에 밀착하고 코어를 조입니다",
+      "손잡이를 잡고 숨을 내쉬며 위로 밀어올립니다",
+      "팔이 완전히 펴지기 직전에 멈추고 천천히 내립니다",
+    ],
+    tips: [
+      "허리가 과도하게 아치를 만들지 않도록 코어에 힘을 유지하세요",
+      "손잡이를 내릴 때 귀 높이까지만 내려오면 충분합니다",
+    ],
+    commonMistakes: [
+      "허리 아치 과도 — 등을 등받이에 붙이세요",
+      "무게가 너무 무거워 반동 사용 — 컨트롤 가능한 무게로 줄이세요",
+    ],
+    youtubeId: "Wol67nR5CGI", difficulty: "beginner",
+  },
+  {
+    id: 5, name: "Leg Extension Machine", nameKo: "레그 익스텐션 머신", emoji: "🦵",
+    category: "machine", targetMuscles: ["대퇴사두"],
+    description: "대퇴사두(앞허벅지)만 집중적으로 고립시키는 머신. 무릎 재활에도 활용됩니다.",
+    howTo: [
+      "패드를 발목(정강이 아래)에 맞춥니다",
+      "등을 등받이에 밀착하고 양옆 손잡이를 잡습니다",
+      "숨을 내쉬며 다리를 위로 펴올립니다",
+      "최상단에서 1~2초 정지하여 대퇴사두를 쥐어짭니다",
+      "천천히 내려 시작 위치로 돌아옵니다",
+    ],
+    tips: [
+      "폭발적으로 올리고 3초간 천천히 내리면 효과 UP",
+      "무릎에 무리가 느껴지면 가동 범위를 줄이세요",
+      "한쪽 다리씩 하면 좌우 불균형을 교정할 수 있습니다",
+    ],
+    commonMistakes: [
+      "반동 사용 — 엉덩이가 시트에서 뜨면 무게를 줄이세요",
+      "무릎 과신전 — 약간 여유를 두고 펴세요",
+    ],
+    youtubeId: "YyvSfVjQeL0", difficulty: "beginner",
+  },
+  {
+    id: 6, name: "Leg Curl Machine", nameKo: "레그 컬 머신", emoji: "🦵",
+    category: "machine", targetMuscles: ["햄스트링"],
+    description: "햄스트링(뒷허벅지)을 고립시켜 강화하는 머신. 라잉(엎드림)과 시티드(앉음) 두 종류가 있습니다.",
+    howTo: [
+      "엎드려서 발목 패드를 아킬레스건 위에 맞춥니다",
+      "양손으로 손잡이를 잡고 골반을 패드에 밀착합니다",
+      "숨을 내쉬며 발뒤꿈치를 엉덩이 쪽으로 말아 올립니다",
+      "최상단에서 1초 정지 후 천천히 내립니다",
+    ],
+    tips: [
+      "발끝을 자기 쪽으로 당기면(도시플렉션) 햄스트링 자극 증가",
+      "골반이 들리면 무게가 과한 겁니다",
+      "시티드 레그컬은 햄스트링을 더 스트레칭 상태에서 자극합니다",
+    ],
+    commonMistakes: [
+      "골반이 들림 — 무게를 줄이고 골반을 고정하세요",
+      "빠른 반복 — 네거티브(내리기)를 천천히 3초로 하세요",
+    ],
+    youtubeId: "1Tq3QdYUuHs", difficulty: "beginner",
+  },
+  {
+    id: 7, name: "Pec Deck / Fly Machine", nameKo: "펙덱 플라이 머신", emoji: "💪",
+    category: "machine", targetMuscles: ["대흉근(내측)", "전면 삼각근"],
+    description: "가슴 안쪽 라인을 만들어주는 고립 운동 머신. 프레스 후 마무리 운동으로 최고입니다.",
+    howTo: [
+      "시트에 앉아 팔을 패드에 놓거나 손잡이를 잡습니다",
+      "팔꿈치를 약간 구부린 상태를 유지합니다",
+      "숨을 내쉬며 양팔을 앞으로 모읍니다",
+      "가슴 앞에서 1~2초 쥐어짠 후 천천히 벌립니다",
+    ],
+    tips: [
+      "모았을 때 가슴을 꽉 쥐어짜면 내측 자극이 극대화됩니다",
+      "팔꿈치 각도를 일정하게 유지하세요 — 각도가 변하면 어깨에 부담",
+    ],
+    commonMistakes: [
+      "팔을 너무 뒤로 벌림 — 어깨 뒤까지 가면 어깨 부상 위험",
+      "어깨에 힘이 들어감 — 견갑골을 모으고 가슴으로 모으세요",
+    ],
+    youtubeId: "Z57CtFmRMxA", difficulty: "beginner",
+  },
+  {
+    id: 8, name: "Smith Machine", nameKo: "스미스 머신", emoji: "🏗️",
+    category: "machine", targetMuscles: ["전신 (운동에 따라 다름)"],
+    description: "바가 레일에 고정된 다목적 머신. 스쿼트, 벤치, 숄더프레스 등 다양한 운동을 안전하게 할 수 있습니다.",
+    howTo: [
+      "바 높이를 운동에 맞게 조절합니다",
+      "안전 스토퍼(세이프티)를 적절한 높이에 설정합니다",
+      "바를 돌려 잠금을 해제한 후 운동을 시작합니다",
+      "운동 후 바를 돌려 다시 잠급니다",
+    ],
+    tips: [
+      "프리웨이트 전 자세 연습용으로 좋습니다",
+      "안전 스토퍼를 반드시 설정하세요 — 혼자 운동할 때 필수!",
+      "고정된 궤도 때문에 관절에 무리가 갈 수 있으니 자연스러운 각도를 찾으세요",
+    ],
+    commonMistakes: [
+      "세이프티 미설정 — 항상 세이프티를 걸고 시작하세요",
+      "프리웨이트와 같은 무게 기대 — 스미스는 보조력이 있어 무게가 다릅니다",
+    ],
+    youtubeId: "IGOc4RDs-eg", difficulty: "beginner",
+  },
+  // === 케이블 (Cable) ===
+  {
+    id: 9, name: "Cable Crossover", nameKo: "케이블 크로스오버", emoji: "🔗",
+    category: "cable", targetMuscles: ["대흉근", "전면 삼각근"],
+    description: "케이블의 일정한 장력으로 가슴을 자극하는 운동. 높이 조절로 상/중/하부 가슴을 타겟할 수 있습니다.",
+    howTo: [
+      "양쪽 케이블 풀리를 높이 조절합니다 (상부: 높게, 하부: 낮게)",
+      "한 발을 앞으로 내밀어 안정적인 자세를 잡습니다",
+      "팔꿈치를 약간 구부린 채 양팔을 앞으로 모읍니다",
+      "가슴 앞에서 1초 쥐어짠 후 천천히 돌아갑니다",
+    ],
+    tips: [
+      "풀리 높이를 바꿔가며 가슴 상/중/하부를 골고루 자극하세요",
+      "저중량 고반복(12~15회)이 효과적인 마무리 운동입니다",
+    ],
+    commonMistakes: [
+      "몸을 과도하게 앞으로 숙임 — 상체를 세우세요",
+      "팔꿈치가 펴짐 — 약간 구부린 상태를 유지하세요",
+    ],
+    youtubeId: "taI4XduLpTk", difficulty: "intermediate",
+  },
+  {
+    id: 10, name: "Cable Row", nameKo: "시티드 케이블 로우", emoji: "🔙",
+    category: "cable", targetMuscles: ["광배근", "능형근", "이두근"],
+    description: "등 중앙부를 두껍게 만들어주는 필수 등 운동. 올바른 자세가 매우 중요합니다.",
+    howTo: [
+      "시트에 앉아 발을 발판에 고정합니다",
+      "V-바 또는 와이드 바를 잡습니다",
+      "가슴을 펴고 등을 곧게 세웁니다",
+      "숨을 내쉬며 팔꿈치를 뒤로 당겨 손잡이를 배꼽 쪽으로 가져옵니다",
+      "견갑골을 모으며 1초 정지 후 천천히 돌아갑니다",
+    ],
+    tips: [
+      "상체를 앞뒤로 흔들지 말고 등 근육으로만 당기세요",
+      "그립에 따라 자극 부위가 달라집니다: V바(중앙), 와이드바(외측)",
+    ],
+    commonMistakes: [
+      "상체를 과도하게 뒤로 젖힘 — 허리 부상 위험! 10~15도만 기울이세요",
+      "이두근으로 당김 — 팔꿈치를 뒤로 보낸다는 느낌으로 하세요",
+    ],
+    youtubeId: "GZbfZ033f74", difficulty: "beginner",
+  },
+  {
+    id: 11, name: "Tricep Pushdown", nameKo: "트라이셉 푸시다운", emoji: "💪",
+    category: "cable", targetMuscles: ["삼두근"],
+    description: "삼두근(팔 뒤쪽)을 고립시키는 대표적인 케이블 운동입니다.",
+    howTo: [
+      "케이블을 최상단에 설정하고 직바/로프/V바를 부착합니다",
+      "팔꿈치를 몸 옆에 고정하고 상완을 움직이지 않습니다",
+      "숨을 내쉬며 전완만 내려 팔을 펍니다",
+      "최하단에서 삼두근을 쥐어짠 후 천천히 올립니다",
+    ],
+    tips: [
+      "로프를 쓰면 하단에서 양쪽으로 벌려 삼두 외측을 더 자극할 수 있습니다",
+      "상완이 움직이면 어깨가 개입합니다 — 팔꿈치 고정이 핵심!",
+    ],
+    commonMistakes: [
+      "팔꿈치가 앞뒤로 움직임 — 몸 옆에 팔꿈치를 '핀'으로 고정하세요",
+      "몸을 앞으로 숙여서 밀어내림 — 체중이 아닌 삼두근으로 밀어내세요",
+    ],
+    youtubeId: "2-LAMcpzODU", difficulty: "beginner",
+  },
+  {
+    id: 12, name: "Face Pull", nameKo: "페이스 풀", emoji: "🎯",
+    category: "cable", targetMuscles: ["후면 삼각근", "능형근", "외회전근"],
+    description: "어깨 건강과 자세 교정에 최고의 운동. 모든 분들이 꼭 해야 할 운동입니다!",
+    howTo: [
+      "케이블을 얼굴 높이에 설정하고 로프를 부착합니다",
+      "로프 양쪽 끝을 잡고 한 발 뒤로 물러섭니다",
+      "팔꿈치를 높이 유지하며 로프를 얼굴 양쪽으로 당깁니다",
+      "어깨 뒤쪽 근육을 쥐어짠 후 천천히 돌아갑니다",
+    ],
+    tips: [
+      "당겼을 때 '더블 바이셉' 자세가 되어야 정확한 자세입니다",
+      "저중량 고반복(15~20회)으로 매일 해도 좋습니다",
+      "거북목, 라운드 숄더 교정에 탁월합니다",
+    ],
+    commonMistakes: [
+      "팔꿈치가 내려감 — 팔꿈치를 어깨 높이 이상으로 유지하세요",
+      "몸이 앞으로 끌려감 — 코어를 조이고 체중을 뒤꿈치에 싣세요",
+    ],
+    youtubeId: "rep-qVOkqgk", difficulty: "beginner",
+  },
+  // === 프리웨이트 (Free Weights) ===
+  {
+    id: 13, name: "Barbell", nameKo: "바벨", emoji: "🔩",
+    category: "free_weight", targetMuscles: ["전신 (운동에 따라 다름)"],
+    description: "가장 기본적인 프리웨이트 도구. 올림픽 바(20kg)와 스탠다드 바가 있습니다.",
+    howTo: [
+      "올림픽 바벨: 길이 2.2m, 무게 20kg (여성용 15kg)",
+      "원판을 양쪽에 동일하게 끼우고 클립으로 고정합니다",
+      "주요 운동: 벤치프레스, 스쿼트, 데드리프트, OHP, 바벨 로우",
+      "그립: 오버그립, 언더그립, 믹스 그립 상황에 따라 사용",
+    ],
+    tips: [
+      "빈 바(20kg)부터 시작해서 자세를 완벽히 익히세요",
+      "항상 클립을 끼워 원판이 빠지는 것을 방지하세요",
+      "바를 잡을 때 손목이 꺾이지 않도록 바를 손바닥 하단에 놓으세요",
+    ],
+    commonMistakes: [
+      "원판 클립 미사용 — 한쪽이 빠지면 매우 위험합니다",
+      "빈 바 무게 무시 — 올림픽 바는 20kg입니다, 무게 계산에 포함하세요",
+    ],
+    youtubeId: "gRVjAtPip0Y", difficulty: "beginner",
+  },
+  {
+    id: 14, name: "Dumbbell", nameKo: "덤벨", emoji: "🏋️",
+    category: "free_weight", targetMuscles: ["전신 (운동에 따라 다름)"],
+    description: "가장 활용도가 높은 프리웨이트. 좌우 독립적으로 움직여 균형 발달에 좋습니다.",
+    howTo: [
+      "용도에 맞는 무게를 선택합니다 (초보: 남성 8~12kg, 여성 3~6kg)",
+      "손바닥이 원하는 방향을 향하도록 잡습니다",
+      "주요 운동: DB 벤치프레스, DB 숄더프레스, DB 로우, 컬, 런지",
+      "사용 후 제자리에 정리합니다",
+    ],
+    tips: [
+      "양쪽 무게가 다르게 느껴지면 약한 쪽 기준으로 맞추세요",
+      "무거운 덤벨은 '체스트 킥'으로 안전하게 시작 위치를 잡으세요",
+      "가동범위가 바벨보다 넓어 더 깊은 스트레칭이 가능합니다",
+    ],
+    commonMistakes: [
+      "좌우 폼이 다름 — 거울로 확인하며 대칭을 맞추세요",
+      "너무 무거운 무게 — 컨트롤 가능한 무게가 올바른 무게입니다",
+    ],
+    youtubeId: "ykJmrZ5v0Oo", difficulty: "beginner",
+  },
+  {
+    id: 15, name: "EZ Bar", nameKo: "이지바 (EZ바)", emoji: "〰️",
+    category: "free_weight", targetMuscles: ["이두근", "삼두근"],
+    description: "구불구불한 모양의 바로, 손목에 가해지는 부담을 줄여줍니다. 팔 운동에 최적화된 바입니다.",
+    howTo: [
+      "EZ바의 안쪽 또는 바깥쪽 곡선 부분을 잡습니다",
+      "바이셉 컬: 언더그립으로 잡고 팔꿈치를 고정한 채 들어올립니다",
+      "스컬 크러셔: 벤치에 누워 이마 위에서 팔을 접었다 폅니다",
+      "클로즈그립 프레스: 좁은 그립으로 벤치프레스하여 삼두를 자극합니다",
+    ],
+    tips: [
+      "직바보다 손목이 편하므로 팔 운동 시 적극 활용하세요",
+      "바깥 그립은 이두 장두, 안쪽 그립은 이두 단두에 더 자극됩니다",
+    ],
+    commonMistakes: [
+      "팔꿈치 움직임 — 컬 시 팔꿈치를 몸 옆에 고정하세요",
+      "반동 사용 — 상체를 흔들지 말고 이두의 힘만 사용하세요",
+    ],
+    youtubeId: "kwG2ipFRgFo", difficulty: "beginner",
+  },
+  {
+    id: 16, name: "Kettlebell", nameKo: "케틀벨", emoji: "🫖",
+    category: "free_weight", targetMuscles: ["전신", "코어", "둔근"],
+    description: "주전자 모양의 웨이트. 스윙, 클린, 스내치 등 폭발적인 전신 운동에 탁월합니다.",
+    howTo: [
+      "케틀벨 스윙: 양손으로 잡고 엉덩이 힌지로 앞뒤 스윙합니다",
+      "고블릿 스쿼트: 가슴 앞에 들고 스쿼트합니다",
+      "터키시 겟업: 누운 상태에서 한 팔로 들고 일어섭니다",
+      "케틀벨 클린: 한 손으로 잡고 가슴 높이까지 올립니다",
+    ],
+    tips: [
+      "스윙은 팔 운동이 아닙니다! 엉덩이 폭발력(힙 힌지)이 핵심",
+      "초보자 권장: 남성 12~16kg, 여성 8~12kg",
+      "유산소+근력을 동시에 할 수 있는 최고의 도구입니다",
+    ],
+    commonMistakes: [
+      "스윙 시 스쿼트 동작을 함 — 무릎이 아닌 엉덩이를 뒤로 보내세요",
+      "등이 둥글어짐 — 항상 등을 곧게 유지하세요",
+    ],
+    youtubeId: "YSxHifyI6s8", difficulty: "intermediate",
+  },
+  // === 유산소 기구 (Cardio Equipment) ===
+  {
+    id: 17, name: "Treadmill", nameKo: "트레드밀 (러닝머신)", emoji: "🏃",
+    category: "cardio_eq", targetMuscles: ["하체 전체", "심폐"],
+    description: "가장 대중적인 유산소 기구. 걷기부터 전력질주까지, 경사도 조절로 강도를 변화시킬 수 있습니다.",
+    howTo: [
+      "안전 클립을 옷에 부착합니다 (넘어지면 자동 정지)",
+      "느린 속도(3~4km/h)로 시작하여 워밍업합니다",
+      "편안한 속도로 올린 후 유지합니다",
+      "경사도를 1~3%로 올리면 실외 러닝과 비슷한 강도가 됩니다",
+      "운동 후 3~5분 쿨다운 워킹으로 마무리합니다",
+    ],
+    tips: [
+      "손잡이를 잡으면 칼로리 소모가 줄어듭니다 — 팔을 자연스럽게 흔드세요",
+      "인클라인 워킹(경사 10~15%, 속도 5~6km/h)은 둔근 운동으로도 최고",
+      "HIIT: 30초 전력질주 + 60초 걷기를 8~10세트",
+    ],
+    commonMistakes: [
+      "안전 클립 미착용 — 반드시 부착하세요!",
+      "속도를 갑자기 올림 — 점진적으로 올리세요",
+    ],
+    youtubeId: "8iTgefHKIEA", difficulty: "beginner",
+  },
+  {
+    id: 18, name: "Elliptical Machine", nameKo: "일립티컬 (크로스트레이너)", emoji: "🚶",
+    category: "cardio_eq", targetMuscles: ["하체", "코어", "상체"],
+    description: "무릎 관절에 충격이 적은 전신 유산소 기구. 러닝머신이 무릎에 부담된다면 최고의 대안입니다.",
+    howTo: [
+      "페달에 올라서고 손잡이를 잡습니다",
+      "자연스러운 보행 동작으로 페달을 밟습니다",
+      "저항(Resistance)과 경사(Incline)를 조절하여 강도를 설정합니다",
+      "20~40분 일정한 속도를 유지합니다",
+    ],
+    tips: [
+      "움직이는 손잡이를 잡으면 상체까지 운동할 수 있습니다",
+      "역방향 페달링은 햄스트링과 둔근을 더 자극합니다",
+      "무릎이 약한 분, 과체중인 분에게 특히 추천합니다",
+    ],
+    commonMistakes: [
+      "발뒤꿈치가 들림 — 발 전체를 페달에 밀착하세요",
+      "상체가 앞으로 숙여짐 — 바른 자세를 유지하세요",
+    ],
+    youtubeId: "1J9i4VSOjb8", difficulty: "beginner",
+  },
+  {
+    id: 19, name: "Rowing Machine", nameKo: "로잉 머신", emoji: "🚣",
+    category: "cardio_eq", targetMuscles: ["등", "하체", "코어", "팔"],
+    description: "전신 근육의 86%를 사용하는 최고의 유산소 기구. 칼로리 소모율이 매우 높습니다.",
+    howTo: [
+      "발을 발판에 고정하고 손잡이를 잡습니다",
+      "순서: ①다리 밀기 → ②상체 뒤로 기울기 → ③팔 당기기",
+      "돌아올 때: ①팔 펴기 → ②상체 앞으로 → ③다리 접기",
+      "연속 동작으로 부드럽게 반복합니다",
+    ],
+    tips: [
+      "힘의 60%는 다리에서, 30%는 코어에서, 10%는 팔에서 나옵니다",
+      "팔로만 당기면 금방 지칩니다 — 다리 추진력이 핵심!",
+      "2:1 비율 (2초 당기기 + 1초 돌아오기)을 유지하세요",
+    ],
+    commonMistakes: [
+      "팔 먼저 당김 — 다리→코어→팔 순서를 지키세요",
+      "등이 둥글어짐 — 가슴을 펴고 코어에 힘을 유지하세요",
+    ],
+    youtubeId: "zQ82RYIFLN8", difficulty: "beginner",
+  },
+  // === 보조 기구 (Bodyweight Equipment) ===
+  {
+    id: 20, name: "Pull-up Bar", nameKo: "풀업 바 (턱걸이 바)", emoji: "🤸",
+    category: "bodyweight_eq", targetMuscles: ["광배근", "이두근", "코어"],
+    description: "최고의 상체 운동 기구. 자기 체중으로 등과 팔을 강화할 수 있습니다.",
+    howTo: [
+      "어깨보다 넓게 바를 잡습니다 (오버그립 = 풀업, 언더그립 = 친업)",
+      "매달린 상태에서 견갑골을 아래로 내립니다",
+      "팔꿈치를 옆구리로 당기며 턱이 바 위로 올라올 때까지 당깁니다",
+      "천천히 내려와 완전히 편 상태로 돌아갑니다",
+    ],
+    tips: [
+      "못하면: 밴드 보조 → 네거티브(내려가기만) → 풀 풀업 순으로 진행",
+      "친업(언더그립)이 더 쉬우니 처음에는 친업부터 시작하세요",
+      "매달리기만 해도 그립력과 어깨 건강에 좋습니다",
+    ],
+    commonMistakes: [
+      "반동(키핑) 사용 — 스트릭트하게 하는 것이 근력 발달에 효과적",
+      "반만 내려옴 — 완전히 팔을 편 상태(데드행)에서 시작하세요",
+    ],
+    youtubeId: "eGo4IYlbE5g", difficulty: "intermediate",
+  },
+];
+
+export function getEquipmentById(id: number): Equipment | undefined {
+  return GYM_EQUIPMENT.find(e => e.id === id);
+}

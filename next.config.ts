@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  basePath: "/fitflow",
+  // output: "export",  // Capacitor 빌드 시 활성화
   images: { unoptimized: true },
 };
 
